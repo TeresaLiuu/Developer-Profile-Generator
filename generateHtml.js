@@ -1,4 +1,4 @@
-function generateHtml({ avatar_url, name, location, html_url, blog, bio, public_repos, followers, following, starRepos }) {
+function generateHtml({ avatar_url, name, location, html_url, blog, bio, public_repos, followers, following, star_repos }) {
     return `
     <!DOCTYPE html>
 <html lang="en">
@@ -18,25 +18,37 @@ function generateHtml({ avatar_url, name, location, html_url, blog, bio, public_
             margin-bottom:40px;
             margin-top:30px;
         }
+        .card-img-top{
+            position:relative;
+            height: 200px;
+            width: 250px;
+        }
+        #nameInfo{
+            height:300px;
+            width:250px;
+        }
+        a{
+            display:inline-block;
+        }
        
     </style>
 </head>
 
  <div class="row justify-content-center">
     <div class="col col-md-auto">
-    <div id="nameInfo" class="card text-center" style="width: 30rem;">
-        <img src="${avatar_url}" class="card-img-top" alt="...">
-        <div class="card-body">
-            <p class="card-text">${name}</p>
-            <a href="http://www.google.com/maps/place/${location}" target="_blank">${location}</a>
-            <a href="${html_url}" target="_blank">Github</a>
-            <a href="${bio}" target="_blank">Blog</a>
-        </div>    
+        <div id="nameInfo" class="card text-center" style="width: 20rem;">
+            <img src="${avatar_url}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">${name}</p>
+                    <a href="http://www.google.com/maps/place/${location}" target="_blank">${location}</a>
+                    <p>${bio}</p>
+                    <a href="${html_url}" target="_blank">Github</a>
+                    <a href="${blog}" target="_blank">Blog</a>
+                </div>    
+        </div>
     </div>
-  </div>
+</div>
 
-    
-    </div>
     <div class="row  justify-content-around">
         <div class="col-4">
             <div class="card text-center">
@@ -79,6 +91,8 @@ function generateHtml({ avatar_url, name, location, html_url, blog, bio, public_
 </html>`;
 }
 
+
+
 module.exports = {
-    generateHtml : generateHtml
-  }
+    generateHtml: generateHtml,
+}

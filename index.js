@@ -25,8 +25,10 @@ async function promptUser() {
         const queryUrl2 = `https://api.github.com/users/${userName}/repos`;
         const repos = await axios.get(queryUrl2)
         const starRepos = repos.data.filter(repo => repo.stargazers_count > 0).length;
+        userInfo['star_repos']=starRepos;        
         const index = html.generateHtml(userInfo);
         const css = generateCss(color);
+    
 
         fs.writeFile('index.html', index, (err) => {
             console.log(err)
@@ -42,14 +44,14 @@ async function promptUser() {
 
 };
 
-
 function generateCss(color) {
     return `
     .card {
         background-color: ${color}
-        color: white;
     };
     `
 }
+    
+
 
 promptUser()
