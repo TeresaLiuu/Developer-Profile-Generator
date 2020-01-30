@@ -76,6 +76,9 @@ function generateHtml({ avatar_url, name, location, html_url, blog, bio, public_
 
 </body>
 
-</html>
-`;
+</html>`;
 }
+
+module.exports = {
+    generateHtml : generateHtml
+  }

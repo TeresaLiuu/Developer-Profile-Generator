@@ -1,7 +1,8 @@
 const inquirer = require('inquirer');
 const axios = require('axios');
 const fs = require('fs');
-const html = require ('./generateHtml');
+const pdf = require('pdf-creator-node');
+const html = require('./generateHtml');
 
 const questions = [{
     type: 'input',
