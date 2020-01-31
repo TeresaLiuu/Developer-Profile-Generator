@@ -41,7 +41,7 @@ function generateHtml({ avatar_url, name, location, html_url, blog, bio, public_
 
         a {
             display: inline-block;
-            margin-right: 40px;
+            margin-right: 20px;
         }
 
         body {
@@ -123,8 +123,6 @@ function generateHtml({ avatar_url, name, location, html_url, blog, bio, public_
     
     </html>`;
 }
-
-
 
 module.exports = {
     generateHtml: generateHtml,

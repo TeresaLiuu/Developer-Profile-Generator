@@ -3,6 +3,8 @@ const axios = require('axios');
 const fs = require('fs');
 const pdf = require('html-pdf');
 const html = require('./generateHtml');
+const htmlFile = fs.readFileSync('./index.html','utf8');
+const options = {format:'Letter'};
 
 const questions = [{
     type: 'input',
@@ -13,7 +15,7 @@ const questions = [{
     type: 'list',
     name: 'color',
     message: 'Choose a color',
-    choices: ['pink', 'darksalmon', 'yellow','rosybrown']
+    choices: ['pink', 'darksalmon', 'yellow', 'rosybrown']
 }];
 
 async function promptUser() {
@@ -25,19 +27,22 @@ async function promptUser() {
         const queryUrl2 = `https://api.github.com/users/${userName}/repos`;
         const repos = await axios.get(queryUrl2)
         const starRepos = repos.data.filter(repo => repo.stargazers_count > 0).length;
-        userInfo['star_repos']=starRepos;        
+        userInfo['star_repos'] = starRepos;
         const index = html.generateHtml(userInfo);
         const css = generateCss(color);
-     
+
+        pdf.create(htmlFile,options).toFile('./${name}.pdf',function(err,res){
+            if(err)return console.error;
+            console.log(res);
+        });
+
         fs.writeFile('index.html', index, (err) => {
             console.log(err)
         });
-        
+
         fs.writeFile('style.css', css, (err) => {
             console.log(err)
         });
-        
-        
     }
     catch (error) {
         console.error(error);
@@ -49,8 +54,7 @@ function generateCss(color) {
     return `
     .card {
         background-color: ${color}
-    };
-    
-    `
+    };`
 }
+
 promptUser()
