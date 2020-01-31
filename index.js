@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const axios = require('axios');
 const fs = require('fs');
-const pdf = require('pdf-creator-node');
+const pdf = require('html-pdf');
 const html = require('./generateHtml');
 
 const questions = [{
@@ -12,8 +12,8 @@ const questions = [{
 {
     type: 'list',
     name: 'color',
-    message: 'What is your fav color ?',
-    choices: ['pink', 'blue', 'yellow']
+    message: 'Choose a color',
+    choices: ['pink', 'darksalmon', 'yellow','rosybrown']
 }];
 
 async function promptUser() {
@@ -28,15 +28,16 @@ async function promptUser() {
         userInfo['star_repos']=starRepos;        
         const index = html.generateHtml(userInfo);
         const css = generateCss(color);
-    
-
+     
         fs.writeFile('index.html', index, (err) => {
             console.log(err)
         });
-
+        
         fs.writeFile('style.css', css, (err) => {
             console.log(err)
         });
+        
+        
     }
     catch (error) {
         console.error(error);
@@ -49,9 +50,7 @@ function generateCss(color) {
     .card {
         background-color: ${color}
     };
+    
     `
 }
-    
-
-
 promptUser()
