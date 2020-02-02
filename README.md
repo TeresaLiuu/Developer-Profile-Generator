@@ -1,8 +1,6 @@
 # Developer-Profile-Generator
 This is a Node application that can read your github portfolio then generate it to html and pdf resume format.
 
-Here is the link (https://teresaliuu.github.io/Developer-Profile-Generator/)
-
 ![inAction1](https://media.giphy.com/media/JTVrUby7eMKb50eZHt/giphy.gif)
 
 ## Table 0f Contents
